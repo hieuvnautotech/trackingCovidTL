@@ -1,7 +1,21 @@
 import React from 'react'
-
-export default function CountrySelector() {
+import { FormControl, InputLabel, NativeSelect } from '@material-ui/core'
+export default function CountrySelector({ value, handleOnChange }) {
   return (
-    <div>country</div>
-  )
+    <>
+      <FormControl>
+        <InputLabel htmlFor="" shrink>
+          Quốc gia
+        </InputLabel>
+        <NativeSelect
+          value={value}
+          onChange={handleOnChange}
+          inputProps={{
+            name: "country",
+            id: "country-selector",
+          }}
+        ></NativeSelect>
+      </FormControl>
+    </>
+  );
 }
