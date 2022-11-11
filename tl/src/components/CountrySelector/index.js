@@ -1,6 +1,8 @@
 import React from 'react'
 import { FormControl, InputLabel, NativeSelect } from '@material-ui/core'
-export default function CountrySelector({ value, handleOnChange }) {
+import FormHelperText from "@material-ui/core/FormHelperText";
+
+export default function CountrySelector({ value, handleOnChange, countries }) {
   return (
     <>
       <FormControl>
@@ -14,7 +16,18 @@ export default function CountrySelector({ value, handleOnChange }) {
             name: "country",
             id: "country-selector",
           }}
-        ></NativeSelect>
+        >
+          {
+            countries.map((country) => { 
+              return (
+                <option value={ country.ISO2.toLowerCase()}>
+                  { country.Country}
+                </option>
+              )
+            })
+          }
+        </NativeSelect>
+        <FormHelperText>Lựa chọn quốc gia</FormHelperText>
       </FormControl>
     </>
   );
