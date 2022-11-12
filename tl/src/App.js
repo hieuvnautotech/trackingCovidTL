@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import CountrySelector from "./components/CountrySelector";
 import Highlight from "./components/Highlight";
 import Summary from "./components/Summary";
-import { getCountries } from "./apis";
+import { getCountries, getReportByCountry } from "./apis";
 import axios from "axios";
 import { useState } from "react";
 function App() {
@@ -22,9 +22,17 @@ function App() {
   //     setData(res.data);
   //   });
   // }, []);
+
+  const handleOnChange = (e) => {
+    
+    const {Slug} = countries.find((country) => country.ISO2.toLowerCase() === e.target.value)
+    console.log({e, Slug})
+    getReportByCountry(Slug).then((res) => console.log('getReportByCountry', {res}))
+  }
+
   return (
     <>
-      <CountrySelector countries={ countries} />
+      <CountrySelector countries={ countries} handleOnChange={handleOnChange} />
       <Highlight />
       <Summary />
     </>
