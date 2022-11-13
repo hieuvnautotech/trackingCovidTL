@@ -22,13 +22,13 @@ export default function HighlightCard({title, count, type}) {
     const styles = useStyles({type})
 
   return (
-    <div>
+    
         <Card className={styles.wrapper}>
             <CardContent>
               <Typography component="p" variant="body2" className={styles.title}>{title}</Typography>
               <Typography component="span" variant="body2" className={styles.count}>{count}</Typography>
             </CardContent>
           </Card>
-    </div>
+    
   )
 }

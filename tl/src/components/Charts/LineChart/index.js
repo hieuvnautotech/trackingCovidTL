@@ -52,6 +52,8 @@ const generateOptions = (data) =>{
 }
 
 export default function LineChart(data) {
+  console.log('linechart', {data})
+
     const [options, setOptions] = useState({})
 
     useEffect(() => {
