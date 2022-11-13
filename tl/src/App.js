@@ -15,7 +15,7 @@ function App() {
     //   console.log(data)
     // })
       getCountries().then((res)=>{
-        const { data } = res;
+        const  data  = res;
         console.log(data)
       })
   
