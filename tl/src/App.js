@@ -3,25 +3,23 @@ import { useEffect } from "react";
 import CountrySelector from "./components/CountrySelector";
 import Highlight from "./components/Highlight";
 import Summary from "./components/Summary";
-import { getCountries, getReportByCountry } from "./apis";
+import { getCountries, getReportByCountry } from "./components/apis";
 import axios from "axios";
 import { useState } from "react";
 function App() {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const data = await getCountries();
-      setCountries(data)
-      console.log(data);
-    })();
+    
+      getCountries().then((res)=>{
+        data = res
+        console.log(data);
+      })
+      // setCountries(data)
+      
+    
   }, []);
-  // useEffect(() => {
-  //   axios.get("https://api.covid19api.com/countries").then((res) => {
-  //     console.log(res.data);
-  //     setData(res.data);
-  //   });
-  // }, []);
+  
 
   const handleOnChange = (e) => {
     
