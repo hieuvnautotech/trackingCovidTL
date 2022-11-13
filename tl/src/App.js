@@ -19,12 +19,15 @@ function App() {
   }, []);
 
   useEffect(() =>{
-    const {Slug} = countries.find((country) => country.ISO2.toLowerCase() === selectedCountryId)
+    if(selectedCountryId){
+      const {Slug} = countries.find((country) => country.ISO2.toLowerCase() === selectedCountryId)
 
     getReportByCountry(Slug).then((res) =>{
       // xóa đi item cuối trong array
       res.data.pop()
       setReport(res.data)})
+    }
+    
     
      
     
