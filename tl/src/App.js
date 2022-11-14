@@ -7,31 +7,28 @@ import { getCountries, getReportByCountry } from "./components/apis";
 import { useState } from "react";
 function App() {
   const [countries, setCountries] = useState([]);
-  const [selectedCountryId, setSelectedCountryId] = React.useState('');
-  const [report, setReport] = React.useState([]);
+  const [selectedCountryId, setSelectedCountryId] = useState('');
+  const [report, setReport] = useState([]);
 
   useEffect(() => {   
       getCountries().then((res)=>{
-        const {data} = res
-        console.log(data)
-        setCountries(data)
+        // const {data} = res
+        // console.log(data)
+        setCountries(res.data)
         setSelectedCountryId('vn')
       }) 
   }, []);
 
   useEffect(() =>{
     if(selectedCountryId){
-      const {Slug} = countries.find((country) => country.ISO2.toLowerCase() === selectedCountryId)
+      const { Slug } = countries.find(
+        (country) => country.ISO2.toLowerCase() === selectedCountryId)
 
     getReportByCountry(Slug).then((res) =>{
       // xóa đi item cuối trong array
       res.data.pop()
       setReport(res.data)})
     }
-    
-    
-     
-    
   },[countries, selectedCountryId])
   
 

@@ -1,9 +1,13 @@
-import HighchartsReact from 'highcharts-react-official'
-import Highchart from 'highcharts'
-import React from 'react'
-import {useState, useEffect} from 'react'
+import React, { useEffect, useState } from 'react';
+import Highchart from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import moment from 'moment';
+import { Button, ButtonGroup } from '@material-ui/core';
+
 const generateOptions = (data) =>{
-    const categories = []
+  const categories = data.map((item) => moment(item.Date).format('DD/MM/YYYY'))
+
+    console.log('categories',{categories})
     return {
         chart: {
             height: 500,
@@ -15,9 +19,7 @@ const generateOptions = (data) =>{
             categories: categories,
             crosshair: true,
         },
-        colors:
-           ['#F3585B'] 
-        ,
+        colors:['#F3585B'],
         yAxis:{
             min: 0,
             title: {
@@ -51,7 +53,7 @@ const generateOptions = (data) =>{
     }
 }
 
-export default function LineChart(data) {
+export default function LineChart({data}) {
   console.log('linechart', {data})
 
     const [options, setOptions] = useState({})
