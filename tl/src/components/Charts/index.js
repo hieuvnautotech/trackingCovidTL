@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function chart() {
+export default function Chart() {
   return (
     <div>chart</div>
   )
