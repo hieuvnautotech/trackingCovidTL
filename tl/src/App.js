@@ -6,6 +6,7 @@ import summary from './components/Summary/index';
 function App() {
   return(
     <>
+        <p>This is app</p>
         <countrySelector>select</countrySelector>
         <summary>summary</summary>
         <chart>chart</chart>
