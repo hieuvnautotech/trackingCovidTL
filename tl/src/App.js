@@ -1,15 +1,14 @@
 import React from "react";
-import chart from "./components/Charts";
-import countrySelector from './components/CountrySelector/index';
-import summary from './components/Summary/index';
+import Chart from "./components/Charts";
+import CountrySelector from './components/CountrySelector';
+import Summary from './components/Summary';
 
 function App() {
   return(
     <>
-        <p>This is app</p>
-        <countrySelector>select</countrySelector>
-        <summary>summary</summary>
-        <chart>chart</chart>
+        <CountrySelector/>
+        <Summary/>
+        <Chart/>
     </>
   )
 }

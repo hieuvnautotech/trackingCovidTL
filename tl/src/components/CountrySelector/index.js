@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function countrySelector() {
+export default function CountrySelector() {
   return (
     <div>country selector</div>
   )
