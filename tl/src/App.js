@@ -2,11 +2,14 @@ import React from "react";
 import CountrySelector from './components/CountrySelector';
 import Summary from './components/Summary';
 import HighLight from "./components/HighLight"; 
-import { getCountries } from './components/apis'
+import { getCountries, getReportByCountry } from './components/apis'
 import { useEffect, useState} from 'react'
 
 const App = () => {
   const [countries, setCountries] = useState([])
+  const [selectedCountryId, setSelectedCountryId] = useState('')
+  const [report, setReport] = useState([])
+
   useEffect(() => { 
     getCountries().then((res) => { 
       const { data } = res
@@ -15,13 +18,26 @@ const App = () => {
     })
   },[])
 
+  const handleOnChange = (e) => {
+    setSelectedCountryId(e.target.value)
+    
+  }
+
+  useEffect(() => {
+    const {Slug}=countries.find(country => country.ISO2.toLowerCase() === selectedCountryId)
+
+    getReportByCountry(Slug).then((res) => {
+      res.data.pop()
+      setReport(res.data)
+    })
+  },[countries,selectedCountryId])
   
 
   return (
     <>
-      <CountrySelector countries={countries} />
-      <HighLight/>
-      <Summary />
+      <CountrySelector countries={countries} handleOnChange={handleOnChange} />
+      <HighLight report={report}/>
+      <Summary report={report} />
       
     </>
   );

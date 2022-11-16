@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CountrySelector({ countries }) {
+export default function CountrySelector({ countries, value, handleOnChange, }) {
   const classes = useStyles();
   return (
     <div>
@@ -25,8 +25,8 @@ export default function CountrySelector({ countries }) {
           Quốc Gia
         </InputLabel>
         <NativeSelect
-          value={{}}
-          onChange={{}}
+          value={value}
+          onChange={handleOnChange}
           inputProps={{
             name: "country",
             id: "country-selector",

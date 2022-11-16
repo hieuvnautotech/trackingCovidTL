@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
 
-export default function HighLight() {
+export default function HighLight({report}) {
   return (
     <div>
       <Grid container spacing={3}>
