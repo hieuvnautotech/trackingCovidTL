@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CountrySelector() {
+export default function CountrySelector({ countries}) {
   const classes = useStyles();
   return (
     <div>
@@ -26,12 +26,18 @@ export default function CountrySelector() {
         </InputLabel>
         <NativeSelect
           value={{}}
-                onChange={{}}
-                inputProps={{
-                  name:'country',
-                  id:'country-selector',
-                }}
-        ></NativeSelect>
+          onChange={{}}
+          inputProps={{
+            name:'country',
+            id:'country-selector',
+          }}
+        >
+          {countries.map(({ item, ISO2 }) => {
+            <option></option>
+            
+          })}
+
+        </NativeSelect>
       </FormControl>
     </div>
 
