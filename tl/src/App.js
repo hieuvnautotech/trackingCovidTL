@@ -2,6 +2,7 @@ import React from "react";
 import Chart from "./components/Charts";
 import CountrySelector from './components/CountrySelector';
 import Summary from './components/Summary';
+import HighLight from "./components/HighLight"; 
 import { getCountries } from './components/apis'
 import { useEffect, useState} from 'react'
 
@@ -20,6 +21,7 @@ const App = () => {
   return (
     <>
       <CountrySelector countries={countries} />
+      <HighLight/>
       <Summary />
       <Chart />
     </>
