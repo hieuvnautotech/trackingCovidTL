@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CountrySelector({ countries}) {
+export default function CountrySelector({ countries }) {
   const classes = useStyles();
   return (
     <div>
@@ -28,16 +28,22 @@ export default function CountrySelector({ countries}) {
           value={{}}
           onChange={{}}
           inputProps={{
-            name:'country',
-            id:'country-selector',
+            name: "country",
+            id: "country-selector",
           }}
         >
-          {countries.map(({ item, ISO2 }) => {
-            <option></option>
-            
-          })}
-
+          {/* {countries.map(({ Country, ISO2 }) => (
+            <option key={ISO2} value={ISO2.toLowerCase()}>
+              {Country}
+            </option>
+          ))} */}
+          {countries.map(({ Country, ISO2 }) => (
+            <option key={ISO2} value={ISO2.toLowerCase()}>
+              {Country}
+            </option>
+          ))}
         </NativeSelect>
+        <FormHelperText>Lựa chọn quốc gia</FormHelperText>
       </FormControl>
     </div>
 

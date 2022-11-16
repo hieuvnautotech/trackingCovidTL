@@ -6,7 +6,7 @@ import { getCountries } from './components/apis'
 import { useEffect, useState} from 'react'
 
 const App = () => {
-  const [countries, setCountries] = useState('')
+  const [countries, setCountries] = useState([])
   useEffect(() => { 
     getCountries().then((res) => { 
       const { data } = res
