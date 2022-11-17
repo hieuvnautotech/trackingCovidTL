@@ -3,47 +3,41 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import HighlightCard from './HighLightCard'
 
+export default function HighLight({ report }) {
+  
+  const data = report && report.length ? report[report.length - 1] : [];
 
-export default function HighLight({report}) {
+  const summary = [
+    {
+      title: "số ca nhiễm",
+      count: data.Confirmed,
+      type: "confirmed",
+    },
+    {
+      title: "số ca khỏi",
+      count: data.Recovered,
+      type: "recovered",
+    },
+    {
+      title: "số ca tử vong",
+      count: data.Deaths,
+      type: "death",
+    },
+  ];
+
   return (
-    <div>
-      <Grid container spacing={3}>
+    <Grid container spacing={3}>
+      {summary.map((item) => (
         <Grid item sm={4} xs={12}>
-          <Card>
-            <CardContent>
-              <Typography>Số ca mắc</Typography>
-              <Typography>3000</Typography>
-            </CardContent>
-          </Card>
+          <HighlightCard
+            title={item.title}
+            count={item.count}
+            type={item.type}
+          />
         </Grid>
-
-        <Grid item sm={4} xs={12}>
-          <Card>
-            <CardContent>
-              <Typography component="p" variant="body2">
-                Số ca khỏi
-              </Typography>
-              <Typography component="span" variant="body2">
-                3000
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid item sm={4} xs={12}>
-          <Card>
-            <CardContent>
-              <Typography component="p" variant="body2">
-                Số ca tử vong
-              </Typography>
-              <Typography component="span" variant="body2">
-                3000
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-    </div>
+      ))}
+    </Grid>
   );
 }

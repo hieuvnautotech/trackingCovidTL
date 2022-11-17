@@ -1,9 +1,9 @@
-import React from 'react'
-import HighChartsReact from 'highcharts-react-official'
+import React from "react";
+import HighChartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-const showData = [1, 2, 4, 8, 16, 32]
+const showData = [1, 2, 4, 8, 16, 32];
 
 // const option = {
 //   chart: {
@@ -20,39 +20,74 @@ const showData = [1, 2, 4, 8, 16, 32]
 //   ],
 // };
 
-const generateOptions = () => {
+const generateOptions = (data) => {
   return {
+    // chart: {
+    //   type: "spline",
+    // },
+    // title: {
+    //   text: "My chart",
+    // },
+    // series: [
+    //     {
+    //       name: "Tổng ca nhiễm",
+    //     data: showData,
+    //   },
+    // ],
     chart: {
-      type: "spline",
+      height: 500,
     },
     title: {
-      text: "My chart",
+      text: "Tổng ca nhiễm",
+    },
+    xAxis: {
+      // categories: categories,
+      crosshair: true,
+    },
+    colors: ["#F3585B"],
+    yAxis: {
+      min: 0,
+      title: {
+        text: null,
+      },
+      labels: {
+        align: "right",
+      },
+    },
+    tooltip: {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      pointFormat:
+        '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        '<td style="padding:0"><b>{point.y} ca</b></td></tr>',
+      footerFormat: "</table>",
+      shared: true,
+      useHTML: true,
+    },
+    plotOptions: {
+      column: {
+        pointPadding: 0.2,
+        borderWidth: 0,
+      },
     },
     series: [
-        {
-          name: "Tổng ca nhiễm",
+      {
+        name: "Tổng Ca nhiễm",
         data: showData,
       },
     ],
-  }
-}
+  };
+};
 
-export default function LineChart() {
-
-  const [options, setOptions] = useState({})
+export default function LineChart({data}) {
+  const [options, setOptions] = useState({});
 
   useEffect(() => {
-    setOptions(generateOptions())
-  },[])
+    setOptions(generateOptions(data));
+  }, [data]);
 
-    
   return (
     <div>
-      <HighChartsReact
-        highcharts={Highcharts}   
-        options={options}
-      />
-      
+      <HighChartsReact highcharts={Highcharts} options={options} />
     </div>
   );
 }
