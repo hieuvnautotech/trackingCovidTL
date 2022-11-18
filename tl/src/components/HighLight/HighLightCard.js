@@ -1,6 +1,10 @@
 import React from "react";
-import { Card, Typography, CardContent, makeStyles } from "@material-ui/core";
-
+import {
+  Card,
+  Typography,
+  CardContent,
+  makeStyles
+} from "@material-ui/core";
 const useStyles = makeStyles({
   wrapper: (props) => {
     console.log({ props });
@@ -13,14 +17,14 @@ const useStyles = makeStyles({
 });
 
 export default function HighlightCard({ title, count, type }) {
-  const styles = useStyles({ type });
+  const classes = useStyles({ type });
   return (
-    <Card className={styles.wrapper}>
+    <Card className={classes.wrapper}>
       <CardContent>
-        <Typography component="p" variant="body2" className={styles.title}>
+        <Typography component="p" variant="body2" className={classes.title}>
           {title}
         </Typography>
-        <Typography component="span" variant="body2" className={styles.count}>
+        <Typography component="span" variant="body2" className={classes.count}>
           {count}
         </Typography>
       </CardContent>

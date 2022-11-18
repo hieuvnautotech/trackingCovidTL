@@ -3,7 +3,7 @@ import HighChartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { useEffect, useState } from "react";
 
-const showData = [1, 2, 4, 8, 16, 32];
+// const showData = [1, 2, 4, 8, 16, 32];
 
 // const option = {
 //   chart: {
@@ -21,6 +21,7 @@ const showData = [1, 2, 4, 8, 16, 32];
 // };
 
 const generateOptions = (data) => {
+  console.log(data, "kkk");
   return {
     // chart: {
     //   type: "spline",
@@ -72,22 +73,26 @@ const generateOptions = (data) => {
     series: [
       {
         name: "Tổng Ca nhiễm",
-        data: showData,
+        data: data.map((value) => value.Confirmed),
       },
     ],
   };
 };
 
-export default function LineChart({data}) {
+export default function LineChart({ data }) {
+  console.log("lineChartData", data);
   const [options, setOptions] = useState({});
 
   useEffect(() => {
     setOptions(generateOptions(data));
   }, [data]);
+  useEffect(() => {
+    console.log(options, "okok");
+  }, [options]);
 
   return (
     <div>
-      <HighChartsReact highcharts={Highcharts} options={options} />
+      {options && <HighChartsReact highcharts={Highcharts} options={options} />}
     </div>
   );
 }

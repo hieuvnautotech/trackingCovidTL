@@ -12,9 +12,10 @@ const App = () => {
 
   useEffect(() => {
     getCountries().then((res) => {
-      const { data } = res;
+      
       console.log("countriesList", res);
-      setCountries(data);
+      setCountries(res.data);
+      setSelectedCountryId('vn')
     });
   }, []);
 
@@ -38,7 +39,7 @@ const App = () => {
 
   return (
     <>
-      <CountrySelector countries={countries} handleOnChange={handleOnChange} />
+      <CountrySelector countries={countries} handleOnChange={handleOnChange} value={ selectedCountryId} />
       <HighLight report={report} />
       <Summary report={report} />
     </>
