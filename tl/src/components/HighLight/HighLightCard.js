@@ -1,14 +1,11 @@
 import React from "react";
-import {
-  Card,
-  Typography,
-  CardContent,
-  makeStyles
-} from "@material-ui/core";
+import { CardContent, Typography, Card, makeStyles } from "@material-ui/core";
+import CountUp from "react-countup";
+
 const useStyles = makeStyles({
   wrapper: (props) => {
     console.log({ props });
-    if (props.type === "confirmed") return { borderLeft: "5px solid #c9302c" };
+    if (props.type === "confirmed") return { borderLeft: "5px solid #c42cc9" };
     if (props.type === "recovered") return { borderLeft: "5px solid #28a745" };
     else return { borderLeft: "5px solid gray" };
   },
@@ -19,13 +16,22 @@ const useStyles = makeStyles({
 export default function HighlightCard({ title, count, type }) {
   const classes = useStyles({ type });
   return (
-    <Card className={classes.wrapper}>
+    <Card
+      style={{
+        borderLeft:
+          type === "confirmed"
+            ? "5px solid #c42cc9"
+            : type === "recovered"
+            ? "5px solid #28a745"
+            : "5px solid gray",
+      }}
+    >
       <CardContent>
-        <Typography component="p" variant="body2" className={classes.title}>
+        <Typography variant="body2" component="p" className={classes.title}>
           {title}
         </Typography>
-        <Typography component="span" variant="body2" className={classes.count}>
-          {count}
+        <Typography variant="body2" component="span" className={classes.count}>
+          <CountUp end={count} separator=" " duration={2} />
         </Typography>
       </CardContent>
     </Card>

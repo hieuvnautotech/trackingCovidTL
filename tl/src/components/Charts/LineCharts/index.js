@@ -2,7 +2,8 @@ import React from "react";
 import HighChartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { useEffect, useState } from "react";
-
+import moment from "moment";
+import { Button, ButtonGroup } from "@material-ui/core";
 // const showData = [1, 2, 4, 8, 16, 32];
 
 // const option = {
@@ -21,7 +22,8 @@ import { useEffect, useState } from "react";
 // };
 
 const generateOptions = (data) => {
-  console.log(data, "kkk");
+  const categories = data.map((item) => moment(item.Date).format("DD/MM/YYYY"))
+  // console.log(data, "kkk")
   return {
     // chart: {
     //   type: "spline",
@@ -42,7 +44,7 @@ const generateOptions = (data) => {
       text: "Tổng ca nhiễm",
     },
     xAxis: {
-      // categories: categories,
+      categories: categories,
       crosshair: true,
     },
     colors: ["#F3585B"],
@@ -73,26 +75,69 @@ const generateOptions = (data) => {
     series: [
       {
         name: "Tổng Ca nhiễm",
-        data: data.map((value) => value.Confirmed),
+        data: data.map((item) => item.Confirmed),
       },
     ],
   };
 };
 
-export default function LineChart({ data }) {
+const LineChart =({ data }) => {
   console.log("lineChartData", data);
   const [options, setOptions] = useState({});
+  const [reportType, setReportType] = useState("all");  
 
   useEffect(() => {
-    setOptions(generateOptions(data));
-  }, [data]);
+    let customData = [];
+    switch (reportType) {
+      case "all":
+        customData = data;
+        break;
+      case "30":
+        customData = data.slice(data.length - 30);
+        break;
+      case "7":
+        customData = data.slice(data.length - 7);
+        break;
+      default:
+        customData = data;
+        break;
+    }
+    setOptions(generateOptions(customData));
+  }, [data, reportType]);
+
+
   useEffect(() => {
     console.log(options, "okok");
   }, [options]);
 
   return (
     <div>
-      {options && <HighChartsReact highcharts={Highcharts} options={options} />}
+      <ButtonGroup
+        size="small"
+        style={{ display: "flex", justifyContent: "flex-end" }}
+      >
+        <Button
+          color={reportType === "all" ? "secondary" : ""}
+          onClick={() => setReportType("all")}
+        >
+          Tất cả
+        </Button>
+        <Button
+          color={reportType === "30" ? "secondary" : ""}
+          onClick={() => setReportType("30")}
+        >
+          30 ngày
+        </Button>
+        <Button
+          color={reportType === "7" ? "secondary" : ""}
+          onClick={() => setReportType("7")}
+        >
+          7 ngày
+        </Button>
+      </ButtonGroup>
+      <HighChartsReact highcharts={Highcharts} options={options} />
     </div>
   );
-}
+};
+
+export default React.memo(LineChart);
